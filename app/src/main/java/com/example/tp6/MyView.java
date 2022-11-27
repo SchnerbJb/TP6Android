@@ -71,7 +71,6 @@ public class MyView extends SurfaceView implements Runnable, SensorEventListener
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-
     }
 
     private void getAccelerometer(SensorEvent event) {
@@ -98,6 +97,7 @@ public class MyView extends SurfaceView implements Runnable, SensorEventListener
             paint.setAntiAlias(true);
             paint.setColor(Color.WHITE);
             c.drawPaint(paint);
+            balls.forEach(ball -> ball.computeGravity(c));
             balls.forEach(ball -> ball.draw(c));
             sh.unlockCanvasAndPost(c);
         }

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 import java.util.Random;
 
@@ -13,7 +14,8 @@ public class Ball {
     float mRadius;
     int mColor;
     float mX, mY;
-    final float gravity = 20;
+    float velocity = 0;
+    final float gravity = 3;
 
 
     public Ball(float radius, float x, float y) {
@@ -29,7 +31,13 @@ public class Ball {
 
     public void computeGravity(Canvas c) {
         Rect r = new Rect((int) (mX - mRadius), (int) (mY - mRadius), (int) (mX + mRadius), (int) (mY + mRadius));
-        if (c.getClipBounds().contains(r));
+        if (c.getClipBounds().contains(r)) {
+            velocity += gravity;
+            mY += velocity;
+
+        } else {
+            velocity = (-velocity) / 2;
+        }
     }
 
     public void draw(Canvas c) {
